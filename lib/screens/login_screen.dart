@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -122,6 +121,8 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
 
   void handleFocus() {
     isChecking?.change(true);
+    isHandUp?.change(false);
+    numLook?.change(0);
   }
 
   void handlePasswordFocus() {
@@ -129,6 +130,8 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
     isHandUp?.change(true);
     numLook?.change(0);
   }
+
+
 
   void moveEyeTrack(String val) {
     numLook?.change(val.length.toDouble());
@@ -174,42 +177,11 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
             child: SafeArea(
               child: Column(
                 children: [
-                  // Header
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                          decoration: BoxDecoration(
-                            color: Colors.black.withOpacity(0.3),
-                            borderRadius: BorderRadius.circular(20),
-                            border: Border.all(
-                              color: const Color(0xFFD2A573).withOpacity(0.3),
-                              width: 1,
-                            ),
-                          ),
-                          child: Text(
-                            '@zain_dev',
-                            style: GoogleFonts.inter(
-                              color: const Color(0xFFD2A573),
-                              fontWeight: FontWeight.w600,
-                              fontSize: 16,
-                              letterSpacing: 0.5,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-
                   // Main content
                   Expanded(
                     child: SingleChildScrollView(
                       child: Column(
                         children: [
-                          // Rive Asset with subtle glow effect
                           AnimatedBuilder(
                             animation: _riveAnimation,
                             builder: (context, child) {
@@ -233,9 +205,9 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
                                                 shape: BoxShape.circle,
                                                 gradient: SweepGradient(
                                                   colors: [
-                                                    const Color(0xFFD2A573).withOpacity(0.0),
-                                                    const Color(0xFFD2A573).withOpacity(0.8),
-                                                    const Color(0xFFD2A573).withOpacity(0.0),
+                                                    const Color(0xFFD2A573).withValues(alpha: 0.0),
+                                                    const Color(0xFFD2A573).withValues(alpha: 0.8),
+                                                    const Color(0xFFD2A573).withValues(alpha: 0.0),
                                                   ],
                                                   stops: const [0.0, 0.5, 1.0],
                                                   transform: GradientRotation(_backgroundAnimation.value * 6.28),
@@ -243,7 +215,7 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
                                               ),
                                               child: Container(
                                                 margin: const EdgeInsets.all(3),
-                                                decoration: BoxDecoration(
+                                                decoration: const BoxDecoration(
                                                   shape: BoxShape.circle,
                                                   color: Colors.transparent,
                                                 ),
@@ -259,8 +231,8 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
                                             shape: BoxShape.circle,
                                             gradient: RadialGradient(
                                               colors: [
-                                                const Color(0xFFD2A573).withOpacity(0.15),
-                                                const Color(0xFFD2A573).withOpacity(0.05),
+                                                const Color(0xFFD2A573).withValues(alpha: 0.15),
+                                                const Color(0xFFD2A573).withValues(alpha: 0.05),
                                                 Colors.transparent,
                                               ],
                                             ),
@@ -275,12 +247,12 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
                                               borderRadius: BorderRadius.circular(24),
                                               boxShadow: [
                                                 BoxShadow(
-                                                  color: Colors.black.withOpacity(0.4),
+                                                  color: Colors.black.withValues(alpha: 0.4),
                                                   blurRadius: 30,
                                                   offset: const Offset(0, 15),
                                                 ),
                                                 BoxShadow(
-                                                  color: const Color(0xFFD2A573).withOpacity(0.2),
+                                                  color: const Color(0xFFD2A573).withValues(alpha: 0.2),
                                                   blurRadius: 40,
                                                   offset: const Offset(0, 0),
                                                 ),
@@ -294,7 +266,7 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
                                                     center: Alignment.center,
                                                     radius: 0.8,
                                                     colors: [
-                                                      Colors.white.withOpacity(0.1),
+                                                      Colors.white.withValues(alpha: 0.1),
                                                       Colors.transparent,
                                                     ],
                                                   ),
@@ -314,8 +286,6 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
                             },
                           ),
 
-                          const SizedBox(height: 30),
-
                           // Login Form
                           AnimatedBuilder(
                             animation: _formAnimation,
@@ -327,15 +297,15 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
                                   child: Container(
                                     margin: const EdgeInsets.symmetric(horizontal: 32),
                                     decoration: BoxDecoration(
-                                      color: Colors.black.withOpacity(0.4),
+                                      color: Colors.black.withValues(alpha: 0.4),
                                       borderRadius: BorderRadius.circular(24),
                                       border: Border.all(
-                                        color: const Color(0xFFD2A573).withOpacity(0.2),
+                                        color: const Color(0xFFD2A573).withValues(alpha: 0.2),
                                         width: 1,
                                       ),
                                       boxShadow: [
                                         BoxShadow(
-                                          color: Colors.black.withOpacity(0.3),
+                                          color: Colors.black.withValues(alpha: 0.3),
                                           blurRadius: 20,
                                           offset: const Offset(0, 10),
                                         ),
@@ -349,9 +319,9 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
                                           Container(
                                             decoration: BoxDecoration(
                                               borderRadius: BorderRadius.circular(16),
-                                              color: Colors.white.withOpacity(0.05),
+                                              color: Colors.white.withValues(alpha: 0.05),
                                               border: Border.all(
-                                                color: const Color(0xFFD2A573).withOpacity(0.3),
+                                                color: const Color(0xFFD2A573).withValues(alpha: 0.3),
                                                 width: 1,
                                               ),
                                             ),
@@ -362,14 +332,14 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
                                               keyboardType: TextInputType.emailAddress,
                                               style: GoogleFonts.inter(
                                                 fontSize: 16,
-                                                color: Colors.white.withOpacity(0.9),
+                                                color: Colors.white.withValues(alpha: 0.9),
                                               ),
                                               cursorColor: const Color(0xFFD2A573),
                                               decoration: InputDecoration(
                                                 hintText: "Email",
                                                 hintStyle: GoogleFonts.inter(
                                                   fontSize: 16,
-                                                  color: Colors.white.withOpacity(0.5),
+                                                  color: Colors.white.withValues(alpha: 0.5),
                                                   fontWeight: FontWeight.w400,
                                                 ),
                                                 border: InputBorder.none,
@@ -379,7 +349,7 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
                                                 ),
                                                 prefixIcon: Icon(
                                                   Icons.email_outlined,
-                                                  color: const Color(0xFFD2A573).withOpacity(0.7),
+                                                  color: const Color(0xFFD2A573).withValues(alpha: 0.7),
                                                   size: 20,
                                                 ),
                                               ),
@@ -392,9 +362,9 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
                                           Container(
                                             decoration: BoxDecoration(
                                               borderRadius: BorderRadius.circular(16),
-                                              color: Colors.white.withOpacity(0.05),
+                                              color: Colors.white.withValues(alpha: 0.05),
                                               border: Border.all(
-                                                color: const Color(0xFFD2A573).withOpacity(0.3),
+                                                color: const Color(0xFFD2A573).withValues(alpha: 0.3),
                                                 width: 1,
                                               ),
                                             ),
@@ -405,14 +375,14 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
                                               obscureText: true,
                                               style: GoogleFonts.inter(
                                                 fontSize: 16,
-                                                color: Colors.white.withOpacity(0.9),
+                                                color: Colors.white.withValues(alpha: 0.9),
                                               ),
                                               cursorColor: const Color(0xFFD2A573),
                                               decoration: InputDecoration(
                                                 hintText: "Password",
                                                 hintStyle: GoogleFonts.inter(
                                                   fontSize: 16,
-                                                  color: Colors.white.withOpacity(0.5),
+                                                  color: Colors.white.withValues(alpha: 0.5),
                                                   fontWeight: FontWeight.w400,
                                                 ),
                                                 border: InputBorder.none,
@@ -422,16 +392,13 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
                                                 ),
                                                 prefixIcon: Icon(
                                                   Icons.lock_outline,
-                                                  color: const Color(0xFFD2A573).withOpacity(0.7),
+                                                  color: const Color(0xFFD2A573).withValues(alpha: 0.7),
                                                   size: 20,
                                                 ),
                                               ),
                                             ),
                                           ),
-
-                                          const SizedBox(height: 24),
-
-                                          // Remember me and Login button
+                                          const SizedBox(height: 10),
                                           Row(
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             children: [
@@ -450,7 +417,7 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
                                                       activeColor: const Color(0xFFD2A573),
                                                       checkColor: Colors.black,
                                                       side: BorderSide(
-                                                        color: const Color(0xFFD2A573).withOpacity(0.5),
+                                                        color: const Color(0xFFD2A573).withValues(alpha: 0.5),
                                                         width: 1.5,
                                                       ),
                                                     ),
@@ -459,53 +426,54 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
                                                   Text(
                                                     "Remember me",
                                                     style: GoogleFonts.inter(
-                                                      color: Colors.white.withOpacity(0.7),
+                                                      color: Colors.white.withValues(alpha: 0.7),
                                                       fontSize: 14,
                                                     ),
                                                   ),
                                                 ],
                                               ),
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                  gradient: const LinearGradient(
-                                                    colors: [
-                                                      Color(0xFFD2A573),
-                                                      Color(0xFFB8956A),
-                                                    ],
-                                                  ),
-                                                  borderRadius: BorderRadius.circular(14),
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: const Color(0xFFD2A573).withOpacity(0.3),
-                                                      blurRadius: 15,
-                                                      offset: const Offset(0, 5),
-                                                    ),
-                                                  ],
+                                            ],
+                                          ),
+                                          const SizedBox(height: 10),
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              gradient: const LinearGradient(
+                                                colors: [
+                                                  Color(0xFFD2A573),
+                                                  Color(0xFFB8956A),
+                                                ],
+                                              ),
+                                              borderRadius: BorderRadius.circular(14),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: const Color(0xFFD2A573).withValues(alpha: 0.3),
+                                                  blurRadius: 15,
+                                                  offset: const Offset(0, 5),
                                                 ),
-                                                child: ElevatedButton(
-                                                  onPressed: login,
-                                                  style: ElevatedButton.styleFrom(
-                                                    backgroundColor: Colors.transparent,
-                                                    shadowColor: Colors.transparent,
-                                                    padding: const EdgeInsets.symmetric(
-                                                      horizontal: 32,
-                                                      vertical: 16,
-                                                    ),
-                                                    shape: RoundedRectangleBorder(
-                                                      borderRadius: BorderRadius.circular(14),
-                                                    ),
-                                                  ),
-                                                  child: Text(
-                                                    "Login",
-                                                    style: GoogleFonts.inter(
-                                                      color: Colors.black,
-                                                      fontWeight: FontWeight.w600,
-                                                      fontSize: 16,
-                                                    ),
-                                                  ),
+                                              ],
+                                            ),
+                                            child: ElevatedButton(
+                                              onPressed: login,
+                                              style: ElevatedButton.styleFrom(
+                                                backgroundColor: Colors.transparent,
+                                                shadowColor: Colors.transparent,
+                                                padding: const EdgeInsets.symmetric(
+                                                  horizontal: 32,
+                                                  vertical: 16,
+                                                ),
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius: BorderRadius.circular(14),
                                                 ),
                                               ),
-                                            ],
+                                              child: Text(
+                                                "Login",
+                                                style: GoogleFonts.inter(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 16,
+                                                ),
+                                              ),
+                                            ),
                                           ),
                                         ],
                                       ),
